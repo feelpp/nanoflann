@@ -64,7 +64,7 @@ if(NOT DEFINED PKGCONFIG_INSTALL_DIR)
 endif()
 
 # Save all executables (unit tests & examples) in the same place:
-set(EXECUTABLE_OUTPUT_PATH ${${PROJECT_NAME}_BINARY_DIR}/bin CACHE PATH "Output directory for executables")
+# set(EXECUTABLE_OUTPUT_PATH ${${PROJECT_NAME}_BINARY_DIR}/bin CACHE PATH "Output directory for executables")
 
 # Define nanoflann lib (header-only)
 add_library(nanoflann INTERFACE)
@@ -140,9 +140,7 @@ configure_file(
   "${nanoflann_BINARY_DIR}/cmake_uninstall.cmake"
   @ONLY IMMEDIATE)
 
-option(MASTER_PROJECT_HAS_TARGET_UNINSTALL "uninstall target to master project CMakeLists.txt" OFF)
-
-if(NOT MASTER_PROJECT_HAS_TARGET_UNINSTALL OR NOT TARGET uninstall)
+if(NOT TARGET uninstall)
   add_custom_target(uninstall
     "${CMAKE_COMMAND}" -P "${nanoflann_BINARY_DIR}/cmake_uninstall.cmake")
 else()
